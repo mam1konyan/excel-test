@@ -3,8 +3,8 @@ import { Main } from '~/main';
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: 'New React Router App' },
-    { name: 'description', content: 'Welcome to React Router!' },
+    { title: '10K Excel Sheet' },
+    { name: 'description', content: 'Welcome to 10K Excel Sheet test app!' },
   ];
 }
 

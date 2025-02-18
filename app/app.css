@@ -6,6 +6,16 @@
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+@layer base {
+  input {
+    @apply appearance-none;
+  }
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    @apply appearance-none;
+  }
+}
+
 html,
 body {
   @apply bg-white dark:bg-gray-950;
