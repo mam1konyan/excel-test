@@ -1,19 +1,13 @@
-export const generateColumns = (size: number) => {
+export const generateColumns = (size: number): string[] => {
   const labels: string[] = [];
-  let row = 0;
-  let currentCharCode = 65;
 
   for (let i = 0; i < size; i++) {
-    let label = String.fromCharCode(currentCharCode);
+    let label = '';
+    let num = i;
 
-    if (row !== 0) label += row;
-
-    if (currentCharCode === 90) {
-      // Z case
-      currentCharCode = 65;
-      row++;
-    } else {
-      currentCharCode++;
+    while (num >= 0) {
+      label = String.fromCharCode(65 + (num % 26)) + label;
+      num = Math.floor(num / 26) - 1;
     }
 
     labels.push(label);

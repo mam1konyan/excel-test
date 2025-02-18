@@ -4,6 +4,7 @@ import { generateColumns } from '~/_helpers';
 import { useRef, useState, useEffect } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { SIZE, COLUMN_WIDTH, COLUMN_HEIGHT } from '~/_constants';
+import { getCellInfo, setCellInfo } from '~/_store';
 
 export function Main() {
   const parentRef = useRef(null);
@@ -66,7 +67,7 @@ export function Main() {
                       </Label>
                     ))
                   : virtualCols.getVirtualItems().map((virtualCol) => {
-                      const cellIndex = `${rowIndex}-${columns[virtualCol.index]}`;
+                      const cellIndex = `${columns[virtualCol.index]}${rowIndex}`;
 
                       return (
                         <Cell
