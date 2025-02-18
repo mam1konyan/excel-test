@@ -4,7 +4,7 @@ import { generateColumns } from '~/_helpers';
 import { useRef, useState, useEffect } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { SIZE, COLUMN_WIDTH, COLUMN_HEIGHT } from '~/_constants';
-import { getCellInfo, setCellInfo } from '~/_store';
+import { clearStore, getCellInfo, setCellInfo } from '~/_store';
 
 export function Main() {
   const parentRef = useRef(null);
@@ -49,9 +49,19 @@ export function Main() {
                   transform: `translateY(${virtualRow.start}px)`,
                 }}
               >
-                <Label className="sticky left-0 z-10">
-                  {rowIndex === 0 ? '' : rows[rowIndex]}
-                </Label>
+                {rowIndex === 0 ? (
+                  <button
+                    className="w-36 h-12 border-r-1 border-b-1 border-white bg-red-200 cursor-pointer"
+                    onClick={() => {
+                      clearStore();
+                      if (window) window.location.reload();
+                    }}
+                  >
+                    Clear
+                  </button>
+                ) : (
+                  <Label className="sticky left-0 z-10">{rows[rowIndex]}</Label>
+                )}
 
                 {rowIndex === 0
                   ? virtualCols.getVirtualItems().map((virtualCol) => (
