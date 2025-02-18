@@ -65,16 +65,21 @@ export function Main() {
                         {columns[virtualCol.index]}
                       </Label>
                     ))
-                  : virtualCols.getVirtualItems().map((virtualCol) => (
-                      <Cell
-                        key={virtualCol.index}
-                        style={{
-                          position: 'absolute',
-                          left: `${virtualCol.start + COLUMN_WIDTH}px`,
-                          width: `${virtualCol.size}px`,
-                        }}
-                      />
-                    ))}
+                  : virtualCols.getVirtualItems().map((virtualCol) => {
+                      const cellIndex = `${rowIndex}-${columns[virtualCol.index]}`;
+
+                      return (
+                        <Cell
+                          cellIndex={cellIndex}
+                          key={cellIndex}
+                          style={{
+                            position: 'absolute',
+                            left: `${virtualCol.start + COLUMN_WIDTH}px`,
+                            width: `${virtualCol.size}px`,
+                          }}
+                        />
+                      );
+                    })}
               </div>
             );
           })}
