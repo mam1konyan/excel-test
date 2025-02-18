@@ -9,7 +9,7 @@ const getStoredData = () => {
 
 let data = getStoredData();
 
-export const getCellInfo = (cellIndex: string) => data[cellIndex] ?? undefined;
+export const getCellInfo = (cellIndex: string) => data[cellIndex] ?? '';
 
 export const setCellInfo = (cellIndex: string, value: string) => {
   data[cellIndex] = value;
