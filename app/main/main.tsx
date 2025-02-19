@@ -5,6 +5,7 @@ import { useRef, useState, useEffect } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { SIZE, COLUMN_WIDTH, COLUMN_HEIGHT } from '~/_constants';
 import { clearStore, getCellInfo, setCellInfo } from '~/_store';
+import { FormulaRow } from '~/_components/formula-row';
 
 export function Main() {
   const parentRef = useRef(null);
@@ -29,6 +30,7 @@ export function Main() {
 
   return (
     <main className="flex flex-col h-screen">
+      <FormulaRow />
       <div ref={parentRef} className="flex-1 overflow-auto">
         <div
           style={{
