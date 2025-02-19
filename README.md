@@ -1,100 +1,145 @@
-# Main to React Router!
+# Excel-like Grid with React
 
-A modern, production-ready template for building full-stack React applications using React Router.
+🔥 [Live Demo](https://excel-test.mamikonyan.io/)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+A performant, virtualized spreadsheet implementation built with React. Features Excel-style column naming (A-Z, AA-ZZ), formula calculations, and local storage persistence.
 
 ## Features
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+### Grid Virtualization
+- Handles large datasets (10K x 10K cells) efficiently
+- Only renders visible cells in viewport
+- Smooth scrolling with overscan support
+- Memory-efficient implementation
 
-## Getting Started
+### Excel-like Features
+- Excel-style column naming (A-Z, AA-ZZ, etc.)
+- Formula support (e.g., `A1=A2+A3`)
+- Basic arithmetic operations (+, -, *, /)
+- Cell references in formulas
+- Error handling for invalid formulas
 
-### Installation
+### Data Management
+- Persistent storage using localStorage
+- Efficient sparse data structure
+- Handles numerical values
+- Browser-compatible storage implementation
 
-Install the dependencies:
+## Components
 
+### Cell Component
+```typescript
+<Cell cellIndex="A1" style={{ /* ... */ }} />
+```
+- Displays cell reference in top-left corner
+- Validates numerical input
+- Persists data to localStorage
+- Custom styling support
+
+### FormulaRow Component
+```typescript
+<FormulaRow />
+```
+- Formula input interface
+- Supports Excel-like formulas
+- Validates formula syntax
+- Performs calculations
+- Error handling and display
+
+### Grid Virtualization
+- Uses custom virtualization implementation
+- Supports both row and column virtualization
+- Configurable overscan for smooth scrolling
+- Memory-efficient viewport rendering
+
+## Data Structure
+
+### Cell Storage
+```typescript
+// Cell value storage format
+{
+  "A1": "123",
+  "B2": "456",
+  // ...
+}
+```
+
+### Column Generation
+- Implements Excel-style column naming
+- Supports unlimited columns (A-Z, AA-ZZ, AAA-ZZZ, etc.)
+- Sequential generation based on index
+
+## Usage
+
+1. Clone the repository
+2. Install dependencies:
 ```bash
 npm install
 ```
-
-### Development
-
-Start the development server with HMR:
-
+3. Start the development server:
 ```bash
 npm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
+## Implementation Details
 
-## Building for Production
-
-Create a production build:
-
-```bash
-npm run build
+### Column Names Generation
+```typescript
+generateColumns(size: number): string[]
 ```
+Generates Excel-style column names:
+- A, B, C, ... Z
+- AA, AB, AC, ... AZ
+- BA, BB, BC, ... BZ
+- etc.
 
-## Deployment
-
-### Docker Deployment
-
-This template includes three Dockerfiles optimized for different package managers:
-
-- `Dockerfile` - for npm
-- `Dockerfile.pnpm` - for pnpm
-- `Dockerfile.bun` - for bun
-
-To build and run using Docker:
-
-```bash
-# For npm
-docker build -t my-app .
-
-# For pnpm
-docker build -f Dockerfile.pnpm -t my-app .
-
-# For bun
-docker build -f Dockerfile.bun -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
+### Data Persistence
+```typescript
+getCellInfo(cellIndex: string): string
+setCellInfo(cellIndex: string, value: string): void
 ```
+- Browser-safe localStorage implementation
+- Handles SSR environments
+- Efficient data structure
 
-The containerized application can be deployed to any platform that supports Docker, including:
+### Formula Processing
+- Supports basic arithmetic operations
+- Pattern matching using regex
+- Error handling for:
+    - Invalid formula syntax
+    - Non-numeric values
+    - Division by zero
+    - Missing cell references
 
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
+## Technical Stack
 
-### DIY Deployment
+- React
+- TypeScript
+- Tailwind CSS
+- localStorage for persistence
 
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
+## Performance Considerations
 
-Make sure to deploy the output of `npm run build`
+- Virtualized rendering for large datasets
+- Efficient data structure for sparse grids
+- Optimized localStorage usage
+- Minimal re-renders
+- Responsive UI
 
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
+## Future Improvements
 
-## Styling
+- Support for more complex formulas
+- Copy/paste functionality
+- Undo/redo support
+- Cell formatting options
+- Export/import capabilities
+- Multi-cell selection
+- Cell range support in formulas
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+## Contributing
 
----
+Feel free to submit issues and enhancement requests!
 
-Built with ❤️ using React Router.
+## License
+
+[MIT License](LICENSE)
