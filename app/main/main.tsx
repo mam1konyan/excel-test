@@ -62,7 +62,7 @@ export function Main() {
                     Clear
                   </button>
                 ) : (
-                  <Label className="sticky left-0 z-10">{rows[rowIndex]}</Label>
+                  <Label>{rows[rowIndex]}</Label>
                 )}
 
                 {rowIndex === 0
